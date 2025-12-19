@@ -1,6 +1,12 @@
-import { eq } from "drizzle-orm";
+import { eq, and } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users } from "../drizzle/schema";
+import { 
+  InsertUser, users, 
+  players, coaches, academies,
+  trainingPrograms, trainingSessions,
+  playerPhysicalData, playerTechnicalData, playerCognitiveData,
+  notifications, videoAnalysis, chatMessages
+} from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -18,6 +24,9 @@ export async function getDb() {
   return _db;
 }
 
+/**
+ * Upsert user - creates or updates a user based on openId
+ */
 export async function upsertUser(user: InsertUser): Promise<void> {
   if (!user.openId) {
     throw new Error("User openId is required for upsert");
@@ -35,7 +44,7 @@ export async function upsertUser(user: InsertUser): Promise<void> {
     };
     const updateSet: Record<string, unknown> = {};
 
-    const textFields = ["name", "email", "loginMethod"] as const;
+    const textFields = ["name", "email", "loginMethod", "phone", "profileImage"] as const;
     type TextField = (typeof textFields)[number];
 
     const assignNullable = (field: TextField) => {
@@ -60,6 +69,11 @@ export async function upsertUser(user: InsertUser): Promise<void> {
       updateSet.role = 'admin';
     }
 
+    if (user.userType !== undefined) {
+      values.userType = user.userType;
+      updateSet.userType = user.userType;
+    }
+
     if (!values.lastSignedIn) {
       values.lastSignedIn = new Date();
     }
@@ -77,6 +91,9 @@ export async function upsertUser(user: InsertUser): Promise<void> {
   }
 }
 
+/**
+ * Get user by openId
+ */
 export async function getUserByOpenId(openId: string) {
   const db = await getDb();
   if (!db) {
@@ -85,8 +102,144 @@ export async function getUserByOpenId(openId: string) {
   }
 
   const result = await db.select().from(users).where(eq(users.openId, openId)).limit(1);
-
   return result.length > 0 ? result[0] : undefined;
 }
 
-// TODO: add feature queries here as your schema grows.
+/**
+ * Get user by ID
+ */
+export async function getUserById(id: number) {
+  const db = await getDb();
+  if (!db) return undefined;
+
+  const result = await db.select().from(users).where(eq(users.id, id)).limit(1);
+  return result.length > 0 ? result[0] : undefined;
+}
+
+/**
+ * Get player by user ID
+ */
+export async function getPlayerByUserId(userId: number) {
+  const db = await getDb();
+  if (!db) return undefined;
+
+  const result = await db.select().from(players).where(eq(players.userId, userId)).limit(1);
+  return result.length > 0 ? result[0] : undefined;
+}
+
+/**
+ * Get coach by user ID
+ */
+export async function getCoachByUserId(userId: number) {
+  const db = await getDb();
+  if (!db) return undefined;
+
+  const result = await db.select().from(coaches).where(eq(coaches.userId, userId)).limit(1);
+  return result.length > 0 ? result[0] : undefined;
+}
+
+/**
+ * Get all players in an academy
+ */
+export async function getPlayersByAcademy(academyId: number) {
+  const db = await getDb();
+  if (!db) return [];
+
+  return await db.select().from(players).where(eq(players.academyId, academyId));
+}
+
+/**
+ * Get all coaches in an academy
+ */
+export async function getCoachesByAcademy(academyId: number) {
+  const db = await getDb();
+  if (!db) return [];
+
+  return await db.select().from(coaches).where(eq(coaches.academyId, academyId));
+}
+
+/**
+ * Get training programs by academy
+ */
+export async function getTrainingProgramsByAcademy(academyId: number) {
+  const db = await getDb();
+  if (!db) return [];
+
+  return await db.select().from(trainingPrograms).where(eq(trainingPrograms.academyId, academyId));
+}
+
+/**
+ * Get training sessions by program
+ */
+export async function getTrainingSessionsByProgram(programId: number) {
+  const db = await getDb();
+  if (!db) return [];
+
+  return await db.select().from(trainingSessions).where(eq(trainingSessions.programId, programId));
+}
+
+/**
+ * Get player's physical data
+ */
+export async function getPlayerPhysicalData(playerId: number) {
+  const db = await getDb();
+  if (!db) return [];
+
+  return await db.select().from(playerPhysicalData).where(eq(playerPhysicalData.playerId, playerId));
+}
+
+/**
+ * Get player's technical data
+ */
+export async function getPlayerTechnicalData(playerId: number) {
+  const db = await getDb();
+  if (!db) return [];
+
+  return await db.select().from(playerTechnicalData).where(eq(playerTechnicalData.playerId, playerId));
+}
+
+/**
+ * Get player's cognitive data
+ */
+export async function getPlayerCognitiveData(playerId: number) {
+  const db = await getDb();
+  if (!db) return [];
+
+  return await db.select().from(playerCognitiveData).where(eq(playerCognitiveData.playerId, playerId));
+}
+
+/**
+ * Get user notifications
+ */
+export async function getUserNotifications(userId: number, limit = 20) {
+  const db = await getDb();
+  if (!db) return [];
+
+  return await db.select().from(notifications)
+    .where(eq(notifications.userId, userId))
+    .limit(limit);
+}
+
+/**
+ * Get video analysis for a player
+ */
+export async function getPlayerVideoAnalysis(playerId: number) {
+  const db = await getDb();
+  if (!db) return [];
+
+  return await db.select().from(videoAnalysis).where(eq(videoAnalysis.playerId, playerId));
+}
+
+/**
+ * Get chat messages for a user
+ */
+export async function getUserChatMessages(userId: number, limit = 50) {
+  const db = await getDb();
+  if (!db) return [];
+
+  return await db.select().from(chatMessages)
+    .where(eq(chatMessages.userId, userId))
+    .limit(limit);
+}
+
+// TODO: add more feature queries here as your schema grows
