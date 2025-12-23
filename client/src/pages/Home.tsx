@@ -22,9 +22,7 @@ export default function Home() {
       <nav className="fixed top-0 w-full z-50 bg-black/30 backdrop-blur-md border-b border-cyan-500/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-lg flex items-center justify-center">
-              <span className="font-bold text-white">AF</span>
-            </div>
+            <img src="/designs/design_2_logo_3d_dynamic.png" alt="Alpha Foot Logo" className="w-12 h-12 rounded-lg" />
             <span className="text-xl font-bold">Alpha Foot</span>
           </div>
           <div className="hidden md:flex gap-8 items-center">
@@ -44,13 +42,13 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section with Design */}
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <div className="space-y-4">
               <div className="inline-block px-4 py-2 bg-cyan-500/20 border border-cyan-500/50 rounded-full text-cyan-400 text-sm font-semibold">
-                🚀 تقنية المستقبل
+                🚀 تقنية المستقبل 2030
               </div>
               <h1 className="text-5xl md:text-6xl font-bold leading-tight">
                 التطوير الأكاديمي والمهني
@@ -69,20 +67,27 @@ export default function Home() {
               </Button>
             </div>
           </div>
-          <div className="relative h-96 md:h-full">
-            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-3xl blur-3xl"></div>
-            <div className="relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur border border-cyan-500/30 rounded-3xl p-8 h-full flex items-center justify-center">
-              <div className="text-center space-y-4">
-                <Brain className="w-24 h-24 mx-auto text-cyan-400 animate-pulse" />
-                <p className="text-gray-300">نظام التوأم الرقمي المعرفي</p>
-              </div>
-            </div>
+          <div className="relative h-96 md:h-full flex items-center justify-center">
+            <img src="/designs/design_4_landing_page_hero.png" alt="Alpha Foot Hero" className="w-full h-auto rounded-3xl shadow-2xl shadow-cyan-500/30" />
+          </div>
+        </div>
+      </section>
+
+      {/* Browser Interface Showcase */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black/20">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4">واجهة المتصفح المستقبلية</h2>
+            <p className="text-gray-400 text-lg">تصميم متقدم يتجاوز الوعي البشري والذكاء الاصطناعي</p>
+          </div>
+          <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-cyan-500/30">
+            <img src="/designs/design_1_futuristic_browser_interface.png" alt="Futuristic Browser Interface" className="w-full h-auto" />
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 px-4 sm:px-6 lg:px-8 bg-black/20">
+      <section id="features" className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">الميزات الرئيسية</h2>
@@ -109,13 +114,39 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* Icon System Showcase */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black/20">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4">نظام الأيقونات المتكامل</h2>
+            <p className="text-gray-400 text-lg">أيقونات ذكية وحديثة لجميع ميزات المنصة</p>
+          </div>
+          <div className="rounded-3xl overflow-hidden shadow-2xl shadow-cyan-500/30">
+            <img src="/designs/design_3_icon_system.png" alt="Icon System" className="w-full h-auto" />
+          </div>
+        </div>
+      </section>
+
+      {/* Mobile App UI Showcase */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4">تطبيق الجوال المستقبلي</h2>
+            <p className="text-gray-400 text-lg">واجهات iOS و Android متقدمة وسهلة الاستخدام</p>
+          </div>
+          <div className="rounded-3xl overflow-hidden shadow-2xl shadow-cyan-500/30">
+            <img src="/designs/design_5_mobile_app_ui.png" alt="Mobile App UI" className="w-full h-auto" />
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black/20">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-4 gap-8 text-center">
             {[
-              { number: "15+", label: "جدول بيانات متقدم" },
-              { number: "8", label: "ميزات أساسية" },
+              { number: "20+", label: "جدول بيانات متقدم" },
+              { number: "5", label: "مجموعات تصميمية" },
               { number: "3", label: "أنواع مستخدمين" },
               { number: "2030", label: "رؤيتنا المستقبلية" },
             ].map((stat, idx) => (
