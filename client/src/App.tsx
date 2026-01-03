@@ -24,6 +24,7 @@ import Partnerships from "./pages/Partnerships";
 import RevenueAnalytics from "./pages/RevenueAnalytics";
 import AdminStatistics from "./pages/AdminStatistics";
 import PaymentGateway from "./pages/PaymentGateway";
+import IconsShowcase from "./components/IconsShowcase";
 import { useAuth } from "./_core/hooks/useAuth";
 import { Loader2 } from "lucide-react";
 
@@ -63,6 +64,7 @@ function Router() {
           <Route path="/revenue-analytics" component={RevenueAnalytics} />
           <Route path="/admin-statistics" component={AdminStatistics} />
           <Route path="/payment" component={PaymentGateway} />
+          <Route path="/icons" component={IconsShowcase} />
           <Route path="/player/:id" component={() => <div>Player Profile - Coming Soon</div>} />
           <Route path="/admin" component={() => <div>Admin Panel - Coming Soon</div>} />
         </>

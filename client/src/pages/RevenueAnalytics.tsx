@@ -13,6 +13,7 @@ import {
   Download,
   Filter,
 } from "lucide-react";
+import { PerformanceIcon, AnalyticsIcon, BrainIcon, ChatIcon, PlayerIcon, GoalIcon, TrainingIcon, CoachingIcon, StatsIcon, DashboardIcon, ReportsIcon, SearchIcon, FilterIcon, EditIcon, DeleteIcon } from "@/components/icons/AlphaFootIcons";
 import { useLocation } from "wouter";
 import {
   LineChart as RechartsLineChart,
