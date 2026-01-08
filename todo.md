@@ -199,6 +199,9 @@
 - [ ] إعداد حملات التسويق الرقمي (Google Ads, Facebook Ads)
 
 ### 2.4 إعداد نظام الدفع والربحية
+- [x] إنشاء صفحة خطط الاشتراك (SubscriptionPlans.tsx)
+- [x] إنشاء صفحة إدارة الدفع (PaymentManagement.tsx)
+- [x] إنشاء توثيق شامل لنظام الدفع (PAYMENT_SYSTEM_DOCUMENTATION.md)
 - [ ] تكوين Stripe للدفع العالمي
 - [ ] تكوين Telr للدفع المحلي
 - [ ] إعداد نظام الاشتراكات
