@@ -5,8 +5,8 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
-import Register from "./pages/Register";
 import PlayerDashboard from "./pages/PlayerDashboard";
+import AdvancedQRCode from "./components/AdvancedQRCode";
 import PlayerAvatar from "./pages/PlayerAvatar";
 import TalentDiscovery from "./pages/TalentDiscovery";
 import CustomerService from "./pages/CustomerService";
@@ -42,7 +42,7 @@ function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
-      <Route path="/register" component={Register} />
+      <Route path="/qr-code" component={AdvancedQRCode} />
       {/* Protected routes - will be implemented in next phases */}
       {isAuthenticated && (
         <>
